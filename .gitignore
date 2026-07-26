@@ -10,3 +10,7 @@ src-tauri/gen/
 .vscode/
 .env
 .env.*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

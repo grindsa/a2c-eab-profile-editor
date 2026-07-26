@@ -11,11 +11,14 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.20.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
@@ -23,15 +26,22 @@
     "@types/node": "^22.13.10",
     "svelte": "^5.23.0",
     "svelte-check": "^4.1.5",
+    "tailwindcss": "^4.0.14",
     "typescript": "^5.8.2",
     "vite": "^6.2.2",
-    "vitest": "^3.0.9",
-    "tailwindcss": "^4.0.14"
+    "vitest": "^3.0.9"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.10.4",
+    "@codemirror/lang-yaml": "^6.1.3",
+    "@codemirror/language": "^6.12.4",
+    "@codemirror/search": "^6.7.1",
+    "@codemirror/state": "^6.7.1",
+    "@codemirror/view": "^6.43.6",
     "@tauri-apps/api": "^2.4.0",
     "@tauri-apps/plugin-dialog": "^2.2.0",
     "@tauri-apps/plugin-fs": "^2.2.0",
+    "codemirror": "^6.0.2",
     "yaml": "^2.7.0",
     "zod": "^3.24.2"
   }

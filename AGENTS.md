@@ -121,8 +121,8 @@ git push git@github.com:grindsa/a2c-eab-profile-editor.git eab-editor-split:main
 
 ## Done when
 
-- [ ] Open/edit/save YAML matching skeleton + CI fixture shapes
-- [ ] Template + overlay change adds/removes form fields without code changes
-- [ ] Unknown keys survive save
-- [ ] Mockup flows covered (list/edit, authz+preview, template source, subject+extra)
-- [ ] Desktop builds for Win/macOS/Linux via CI
+- [x] Open/edit/save YAML matching skeleton + CI fixture shapes
+- [x] Template + overlay change adds/removes form fields without code changes
+- [x] Unknown keys survive save
+- [x] Mockup flows covered (list/edit, authz+preview, template source, subject+extra)
+- [x] Desktop builds for Win/macOS/Linux via CI (`.github/workflows/release.yml` on `v*` tags; draft release)

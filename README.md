@@ -2,7 +2,7 @@
 
 Desktop helper to create and maintain **YAML** enrollment profile files for [acme2certifier](https://github.com/grindsa/acme2certifier) **EAB profiling** (`kid_profile_handler` / `key_file`).
 
-> **Status:** scaffold + design mockups. Implementation handoff for agents: see **[AGENTS.md](./AGENTS.md)**.
+> **Status:** v1 editor usable — see **[AGENTS.md](./AGENTS.md)** for remaining release checklist.
 
 ## Why
 
@@ -13,10 +13,10 @@ Upstream docs: [Enrollment profiling via EAB](https://github.com/grindsa/acme2ce
 ## Stack
 
 - **Tauri 2** + **SvelteKit** (static SPA) + TypeScript
-- Tailwind + shadcn-svelte
-- Zod + template YAML
+- Cool-gray / teal utility UI (CSS variables; shadcn-style controls)
+- Zod + template YAML + CodeMirror 6
 - Vitest / Playwright
-- GitHub Actions releases (planned)
+- GitHub Actions CI (unit + e2e); Tauri release matrix planned
 
 ## Mockups
 
@@ -31,19 +31,47 @@ Upstream docs: [Enrollment profiling via EAB](https://github.com/grindsa/acme2ce
 
 ```text
 a2c-eab-profile-editor/
-  AGENTS.md                 # pick-up instructions for coding agents
-  docs/mockups/             # UI mockups
-  templates/                # default UI/data template + overlays
-  src/                      # SvelteKit app (to implement)
-  src-tauri/                # Tauri shell (to implement)
+  AGENTS.md
+  docs/mockups/
+  templates/                # UI template + CA overlays
+  fixtures/                 # example YAML/JSON
+  src/                      # SvelteKit SPA
+  src-tauri/                # Tauri 2 shell
+  e2e/                      # Playwright smoke
+  .github/workflows/ci.yml
 ```
 
-## Local development (once scaffolded)
+## Local development
+
+**Prereqs:** Node.js 20+, Rust (`rustc` / `cargo`), and on macOS Xcode CLT.
 
 ```bash
 cd a2c-eab-profile-editor
 npm install
-npm run tauri dev
+npm run tauri:dev    # Vite + native Tauri window
+# or: npm run dev    # browser-only UI on http://localhost:1420
+```
+
+In the window: **New / Open / Save / Save As / Import JSON**, or **Load example**. Browser mode uses the file picker and downloads for save.
+
+### Tests
+
+```bash
+npm test             # Vitest (IO, template merge, HMAC)
+npm run build && npm run test:e2e   # Playwright smoke against preview
+npm run check        # svelte-check
+```
+
+### Desktop release
+
+Push a version tag to run `.github/workflows/release.yml` (macOS arm64/x64, Linux, Windows via `tauri-action`). Artifacts land on a **draft** GitHub Release for review.
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+# or local package:
+npm run tauri:build
+# artifacts under src-tauri/target/release/bundle/
 ```
 
 ## Separate repository

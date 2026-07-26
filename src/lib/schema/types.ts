@@ -1,6 +1,6 @@
 /**
  * Template types for kid_profiles UI templates.
- * Full loader/merger to be implemented — see AGENTS.md.
+ * Loader/merger: `template.ts` + Zod meta in `meta.ts`.
  */
 
 export type FieldType =
