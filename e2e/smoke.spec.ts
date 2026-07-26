@@ -17,6 +17,11 @@ test.describe('EAB profile editor smoke', () => {
 		await expect(page.locator('.field .name', { hasText: 'profile_id' })).toBeVisible();
 		await expect(page.locator('.field .name', { hasText: 'allowed_domainlist' })).toBeVisible();
 
+		await page.getByRole('link', { name: 'Checks' }).click();
+		await expect(page.getByRole('heading', { name: 'Profile checks', exact: true })).toBeVisible();
+		await page.getByTestId('run-checks').click();
+		await expect(page.getByText(/Checked 4 entries/)).toBeVisible();
+
 		await page.getByRole('link', { name: 'Templates' }).click();
 		await expect(page.getByRole('heading', { name: 'Template source', exact: true })).toBeVisible();
 		await expect(page.getByRole('button', { name: 'Apply template' })).toBeVisible();

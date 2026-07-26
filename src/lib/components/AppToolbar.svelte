@@ -32,6 +32,7 @@
 
 	<nav class="links" aria-label="Views">
 		<a href="/">Profiles</a>
+		<a href="/checks">Checks</a>
 		<a href="/raw">Raw YAML</a>
 		<a href="/templates">Templates</a>
 		<span class="env" class:tauri>{tauri ? 'Tauri' : 'browser'}</span>

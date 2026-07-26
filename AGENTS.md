@@ -117,7 +117,7 @@ git push git@github.com:grindsa/a2c-eab-profile-editor.git eab-editor-split:main
 
 - Talking to a live acme2certifier instance
 - Editing `acme_srv.cfg`
-- Replacing `a2c_eab_chk` (optional later: shell out or reimplement checks)
+- Shelling out to `a2c_eab_chk` / `eab_chk.py` (editor has built-in template checks on `/checks` instead)
 
 ## Done when
 
