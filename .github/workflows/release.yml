@@ -24,8 +24,42 @@ permissions:
   contents: write
 
 jobs:
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      release_id: ${{ steps.meta.outputs.release_id }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+
+      - name: Create or reuse draft release
+        id: meta
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: |
+          set -euo pipefail
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Reusing existing release $TAG"
+          else
+            # Draft first: GITHUB_TOKEN was denied creating a published release
+            # (403 create-a-release) even with contents: write.
+            gh release create "$TAG" \
+              --draft \
+              --verify-tag \
+              --title "a2c EAB Profile Editor ${TAG}" \
+              --notes "Desktop installers for Windows, macOS, and Linux."
+          fi
+          id="$(gh release view "$TAG" --json databaseId --jq .databaseId)"
+          echo "release_id=${id}" >> "$GITHUB_OUTPUT"
+
   publish-tauri:
     name: ${{ matrix.name }}
+    needs: create-release
     strategy:
       fail-fast: false
       matrix:
@@ -78,12 +112,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.event.inputs.tag || github.ref_name }}
-          releaseName: 'a2c EAB Profile Editor ${{ github.event.inputs.tag || github.ref_name }}'
-          releaseBody: |
-            Desktop installers for Windows, macOS, and Linux.
-
-            See the README for install and usage notes.
-          releaseDraft: false
+          releaseId: ${{ needs.create-release.outputs.release_id }}
+          tagName: ${{ needs.create-release.outputs.tag }}
+          releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+
+  publish-release:
+    name: Publish release
+    needs: [create-release, publish-tauri]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Undraft release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.create-release.outputs.tag }}
+        run: gh release edit "$TAG" --draft=false --latest
