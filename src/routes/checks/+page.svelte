@@ -147,7 +147,7 @@
 	button.primary {
 		background: var(--accent);
 		border-color: var(--accent);
-		color: #f4fffd;
+		color: var(--on-accent);
 	}
 	.banner.warn {
 		background: #fff7e6;

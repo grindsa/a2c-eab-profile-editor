@@ -12,7 +12,7 @@
 
 <header class="toolbar">
 	<div class="brand-block">
-		<span class="logo">a2c</span>
+		<img class="logo" src="/logo.png" alt="acme2certifier" />
 		<div>
 			<strong>EAB Profile Editor</strong>
 			<p class="file">{store.displayName}{#if store.dirty} · unsaved{/if}</p>
@@ -63,16 +63,9 @@
 		min-width: 12rem;
 	}
 	.logo {
-		display: grid;
-		place-items: center;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 0.35rem;
-		background: var(--accent);
-		color: #f4fffd;
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.04em;
+		display: block;
+		height: 2.75rem;
+		width: auto;
 	}
 	.brand-block strong {
 		display: block;
@@ -112,7 +105,7 @@
 	button.primary {
 		background: var(--accent);
 		border-color: var(--accent);
-		color: #f4fffd;
+		color: var(--on-accent);
 	}
 	button.ghost {
 		background: transparent;

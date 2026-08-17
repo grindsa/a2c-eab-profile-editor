@@ -25,6 +25,11 @@ export const BUNDLED_OVERLAYS: BundledOverlayInfo[] = [
 	{ id: 'none', label: 'None (base template only)', file: null },
 	{ id: 'acme', label: 'CA overlay: ACME', file: 'acme.yaml' },
 	{ id: 'certifier', label: 'CA overlay: Certifier', file: 'certifier.yaml' },
+	{ id: 'digicert', label: 'CA overlay: Digicert', file: 'digicert.yaml' },
+	{ id: 'ejbca', label: 'CA overlay: EJBCA', file: 'ejbca.yaml' },
+	{ id: 'msca', label: 'CA overlay: MS CA (mscertsrv / MS-ICPR)', file: 'msca.yaml' },
+	{ id: 'openxpki', label: 'CA overlay: OpenXPKI', file: 'openxpki.yaml' },
+	{ id: 'vault', label: 'CA overlay: Vault', file: 'vault.yaml' },
 	{ id: 'xca', label: 'CA overlay: XCA', file: 'xca.yaml' }
 ];
 

@@ -1,0 +1,12 @@
+extends: kid_profiles.template.yaml
+description: Overlay hints for HashiCorp Vault CA handler fields.
+
+sections:
+  - id: cahandler
+    fields_add:
+      - name: vault_role
+        type: string_or_list
+        help: Vault PKI role name(s) allowed for this EAB account.
+      - name: vault_path
+        type: string
+        help: Vault PKI mount path (for example pki).

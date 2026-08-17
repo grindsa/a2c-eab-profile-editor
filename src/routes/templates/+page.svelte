@@ -339,7 +339,7 @@
 	button.primary {
 		background: var(--accent);
 		border-color: var(--accent);
-		color: #f4fffd;
+		color: var(--on-accent);
 	}
 	button.ghost {
 		background: transparent;

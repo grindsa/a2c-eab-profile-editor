@@ -1,0 +1,9 @@
+extends: kid_profiles.template.yaml
+description: Overlay hints for EJBCA CA handler fields.
+
+sections:
+  - id: cahandler
+    fields_add:
+      - name: cert_profile_name
+        type: string_or_list
+        help: EJBCA certificate profile name(s).

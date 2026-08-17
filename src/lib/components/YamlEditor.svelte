@@ -29,23 +29,23 @@
 			height: '100%',
 			fontSize: '0.8rem',
 			backgroundColor: '#fff',
-			color: '#1a242b'
+			color: '#1a2638'
 		},
 		'.cm-content': {
 			fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
-			caretColor: '#0f766e'
+			caretColor: '#0090ba'
 		},
 		'.cm-gutters': {
-			backgroundColor: '#f2f6f7',
-			color: '#5a6b75',
+			backgroundColor: '#f3f7fa',
+			color: '#5a6b7a',
 			border: 'none',
-			borderRight: '1px solid #cfd8dd'
+			borderRight: '1px solid #cdd7e0'
 		},
-		'.cm-activeLine': { backgroundColor: 'rgba(15, 118, 110, 0.06)' },
-		'.cm-activeLineGutter': { backgroundColor: 'rgba(15, 118, 110, 0.08)' },
-		'&.cm-focused .cm-cursor': { borderLeftColor: '#0f766e' },
+		'.cm-activeLine': { backgroundColor: 'rgba(0, 144, 186, 0.06)' },
+		'.cm-activeLineGutter': { backgroundColor: 'rgba(0, 144, 186, 0.08)' },
+		'&.cm-focused .cm-cursor': { borderLeftColor: '#0090ba' },
 		'&.cm-focused .cm-selectionBackground, .cm-selectionBackground': {
-			backgroundColor: 'rgba(15, 118, 110, 0.18)'
+			backgroundColor: 'rgba(0, 144, 186, 0.18)'
 		}
 	});
 

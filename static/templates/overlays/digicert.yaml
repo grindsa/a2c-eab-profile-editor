@@ -1,0 +1,9 @@
+extends: kid_profiles.template.yaml
+description: Overlay hints for Digicert CA handler fields.
+
+sections:
+  - id: cahandler
+    fields_add:
+      - name: cert_type
+        type: string_or_list
+        help: Digicert certificate type / product name(s).

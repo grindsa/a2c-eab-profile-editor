@@ -42,7 +42,7 @@
 		gap: 1.25rem;
 		padding: 0.4rem 1rem;
 		border-top: 1px solid var(--line);
-		background: color-mix(in srgb, var(--surface) 80%, #dfe8ec);
+		background: color-mix(in srgb, var(--surface) 80%, #dce6ee);
 		font-size: 0.75rem;
 		color: var(--muted);
 	}

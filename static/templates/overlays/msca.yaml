@@ -1,0 +1,9 @@
+extends: kid_profiles.template.yaml
+description: Overlay hints for Microsoft CA (mscertsrv / MS-ICPR) template fields.
+
+sections:
+  - id: cahandler
+    fields_add:
+      - name: template
+        type: string_or_list
+        help: ADCS certificate template name(s) allowed for this EAB account.

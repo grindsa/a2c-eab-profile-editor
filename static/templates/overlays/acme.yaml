@@ -7,3 +7,9 @@ sections:
       - name: profile
         type: string_or_list
         help: Allowed ACME profile value(s) for this EAB account.
+      - name: acme_url
+        type: string_or_list
+        help: Upstream ACME directory URL(s) for this EAB account.
+      - name: acme_keyfile
+        type: string_or_list
+        help: Path(s) to the ACME account key file used by the generic ACME handler.

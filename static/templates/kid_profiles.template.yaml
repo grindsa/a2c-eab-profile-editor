@@ -49,6 +49,11 @@ sections:
         type: string
       - name: issuing_ca_key
         type: string
+      - name: ca_error_details_forward
+        type: boolish
+        help: >
+          Pass CA error messages through to the ACME client.
+          Fixtures may use string "True" / "False".
       - name: subject
         type: map
         help: CSR subject DN whitelist (RFC3039 attribute names).
@@ -97,6 +102,11 @@ sections:
         item: cidr_or_ip
       - name: wildcard_certificate_disable
         type: boolish
+      - name: profiles_check_disable
+        type: boolish
+        help: >
+          Skip ACME profile-name validation for this account.
+          Fixtures may use string "True" / "False".
 
 field_types:
   string: { json_type: string }

@@ -1,21 +1,31 @@
 name: Release
 
-# Build desktop installers and attach them to a draft GitHub Release.
-# Trigger: push a version tag, e.g. `git tag v0.1.0 && git push origin v0.1.0`
+# Build desktop installers and attach them to the GitHub Releases page.
+#
+# Triggers:
+#   - Push a version tag:  git tag v0.3.0 && git push origin v0.3.0
+#   - Actions → Release → Run workflow (enter an existing tag)
 on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing git tag to build (e.g. v0.2.0)'
+        required: true
+        type: string
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-${{ github.event.inputs.tag || github.ref }}
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   publish-tauri:
     name: ${{ matrix.name }}
-    permissions:
-      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -40,6 +50,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -66,13 +78,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: 'a2c EAB Profile Editor ${{ github.ref_name }}'
+          tagName: ${{ github.event.inputs.tag || github.ref_name }}
+          releaseName: 'a2c EAB Profile Editor ${{ github.event.inputs.tag || github.ref_name }}'
           releaseBody: |
-            Desktop builds for Windows, macOS, and Linux.
+            Desktop installers for Windows, macOS, and Linux.
 
-            Review the attached artifacts, then publish this draft release when ready.
             See the README for install and usage notes.
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}

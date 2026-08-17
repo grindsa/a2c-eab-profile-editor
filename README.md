@@ -64,12 +64,18 @@ npm run check        # svelte-check
 
 ### Desktop release
 
-Push a version tag to run `.github/workflows/release.yml` (macOS arm64/x64, Linux, Windows via `tauri-action`). Artifacts land on a **draft** GitHub Release for review.
+Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**.
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
-# or local package:
+git tag v0.3.0
+git push origin v0.3.0
+```
+
+To rebuild an existing tag: **Actions → Release → Run workflow** and enter the tag (for example `v0.1.0`).
+
+Local package on the current OS only:
+
+```bash
 npm run tauri:build
 # artifacts under src-tauri/target/release/bundle/
 ```
