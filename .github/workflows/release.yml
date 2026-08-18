@@ -39,6 +39,7 @@ jobs:
         id: meta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           TAG: ${{ github.event.inputs.tag || github.ref_name }}
         run: |
           set -euo pipefail
@@ -126,5 +127,6 @@ jobs:
       - name: Undraft release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           TAG: ${{ needs.create-release.outputs.tag }}
         run: gh release edit "$TAG" --draft=false --latest
