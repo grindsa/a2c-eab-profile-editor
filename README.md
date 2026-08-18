@@ -18,15 +18,6 @@ Upstream docs: [Enrollment profiling via EAB](https://github.com/grindsa/acme2ce
 - Vitest / Playwright
 - GitHub Actions CI (unit + e2e); Tauri release matrix planned
 
-## Mockups
-
-| Screen | Preview |
-|--------|---------|
-| Main editor | ![Main editor](docs/mockups/mockup-01-main-editor.png) |
-| Authorization + YAML | ![Authorization](docs/mockups/mockup-02-authorization-yaml.png) |
-| Template source | ![Templates](docs/mockups/mockup-03-template-source.png) |
-| Subject + extras | ![Subject](docs/mockups/mockup-04-subject-extra.png) |
-
 ## Layout
 
 ```text
@@ -64,20 +55,29 @@ npm run check        # svelte-check
 
 ### Desktop release
 
-Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**. Installer filenames and the in-app version come from the tag (`v0.3.1` → `0.3.1`), not from whatever is currently in `package.json`.
+Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**. Installer filenames and the in-app version come from the tag (`v0.3.1` -> `0.3.1`), not from whatever is currently in `package.json`.
 
-macOS builds are **ad-hoc signed** (no Apple Developer ID). That stops Gatekeeper from reporting the `.dmg` as “damaged,” but first launch still needs **System Settings → Privacy & Security → Open Anyway**. To use an already-downloaded unsigned `.dmg`:
+#### macOS Gatekeeper notice
+
+macOS builds are **ad-hoc signed** (no Apple Developer ID) and not notarized. On first launch macOS will warn that it cannot verify the app is free of malware. To allow it:
+
+1. **Right-click** the app, then choose **Open**, then click **Open** in the confirmation dialog, or
+2. Go to **System Settings -> Privacy & Security**, scroll down, and click **Open Anyway**.
+
+You only need to do this once per download. Alternatively, strip the quarantine flag before opening the DMG:
 
 ```bash
 xattr -cr ~/Downloads/a2c.EAB.Profile.Editor_*.dmg
 ```
 
+#### Tagging a release
+
 ```bash
-git tag v0.3.0
-git push origin v0.3.0
+git tag v0.x.y
+git push origin v0.x.y
 ```
 
-To rebuild an existing tag: **Actions → Release → Run workflow** and enter the tag (for example `v0.3.1`).
+To rebuild an existing tag: **Actions -> Release -> Run workflow** and enter the tag (for example `v0.3.2`).
 
 Local package on the current OS only:
 
@@ -85,10 +85,6 @@ Local package on the current OS only:
 npm run tauri:build
 # artifacts under src-tauri/target/release/bundle/
 ```
-
-## Separate repository
-
-This directory is staged inside `acme2certifier` until a dedicated GitHub repo is created (automation token lacked `createRepository`). See **Repo hosting note** in `AGENTS.md`.
 
 ## License
 
