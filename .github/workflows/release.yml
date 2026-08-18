@@ -110,6 +110,11 @@ macOS: Apple Silicon use the aarch64.dmg; Intel use the x64.dmg. Builds are ad-h
       - name: Install frontend dependencies
         run: npm ci
 
+      - name: Set app version from tag
+        env:
+          TAG: ${{ needs.create-release.outputs.tag }}
+        run: node scripts/set-version.mjs
+
       - name: Build and upload Tauri bundles
         uses: tauri-apps/tauri-action@v0
         env:

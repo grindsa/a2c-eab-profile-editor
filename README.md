@@ -64,7 +64,7 @@ npm run check        # svelte-check
 
 ### Desktop release
 
-Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**.
+Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**. Installer filenames and the in-app version come from the tag (`v0.3.1` → `0.3.1`), not from whatever is currently in `package.json`.
 
 macOS builds are **ad-hoc signed** (no Apple Developer ID). That stops Gatekeeper from reporting the `.dmg` as “damaged,” but first launch still needs **System Settings → Privacy & Security → Open Anyway**. To use an already-downloaded unsigned `.dmg`:
 
@@ -77,7 +77,7 @@ git tag v0.3.0
 git push origin v0.3.0
 ```
 
-To rebuild an existing tag: **Actions → Release → Run workflow** and enter the tag (for example `v0.1.0`).
+To rebuild an existing tag: **Actions → Release → Run workflow** and enter the tag (for example `v0.3.1`).
 
 Local package on the current OS only:
 

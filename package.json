@@ -1,6 +1,6 @@
 {
   "name": "a2c-eab-profile-editor",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "private": true,
   "description": "Desktop editor for acme2certifier EAB kid_profiles YAML",
   "type": "module",
@@ -15,7 +15,8 @@
     "test:e2e:ui": "playwright test --ui",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:build": "tauri build",
+    "version:set": "node scripts/set-version.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.0",
