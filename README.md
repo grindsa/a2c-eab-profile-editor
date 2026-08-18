@@ -66,6 +66,12 @@ npm run check        # svelte-check
 
 Push a version tag to run [`.github/workflows/release.yml`](.github/workflows/release.yml). That builds macOS (arm64 + Intel), Linux, and Windows installers and **publishes them on the GitHub Releases page**.
 
+macOS builds are **ad-hoc signed** (no Apple Developer ID). That stops Gatekeeper from reporting the `.dmg` as “damaged,” but first launch still needs **System Settings → Privacy & Security → Open Anyway**. To use an already-downloaded unsigned `.dmg`:
+
+```bash
+xattr -cr ~/Downloads/a2c.EAB.Profile.Editor_*.dmg
+```
+
 ```bash
 git tag v0.3.0
 git push origin v0.3.0

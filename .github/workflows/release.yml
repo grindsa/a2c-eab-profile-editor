@@ -53,7 +53,9 @@ jobs:
               --draft \
               --verify-tag \
               --title "a2c EAB Profile Editor ${TAG}" \
-              --notes "Desktop installers for Windows, macOS, and Linux."
+              --notes "Desktop installers for Windows, macOS, and Linux.
+
+macOS: Apple Silicon use the aarch64.dmg; Intel use the x64.dmg. Builds are ad-hoc signed (not notarized). If Gatekeeper still blocks first launch, allow it under System Settings → Privacy & Security → Open Anyway."
           fi
           id="$(gh release view "$TAG" --json databaseId --jq .databaseId)"
           echo "release_id=${id}" >> "$GITHUB_OUTPUT"
