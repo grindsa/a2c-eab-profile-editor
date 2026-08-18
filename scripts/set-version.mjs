@@ -60,7 +60,7 @@ writeFileSync(cargoTomlPath, nextCargoToml);
 const cargoLockPath = join(root, 'src-tauri/Cargo.lock');
 const cargoLock = readFileSync(cargoLockPath, 'utf8');
 const nextCargoLock = cargoLock.replace(
-	/(\[\[package\]\]\nname = "a2c-eab-profile-editor"\nversion = ")[^"]+(")/,
+	/(\[\[package\]\]\r?\nname = "a2c-eab-profile-editor"\r?\nversion = ")[^"]+(")/,
 	`$1${version}$2`
 );
 if (nextCargoLock === cargoLock) {
