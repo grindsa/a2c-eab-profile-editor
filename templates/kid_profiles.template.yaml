@@ -54,6 +54,23 @@ sections:
         help: >
           Pass CA error messages through to the ACME client.
           Fixtures may use string "True" / "False".
+      - name: cert_chain_skip_list
+        type: list
+        help: >
+          SHA-256 fingerprints of certificates to drop from the PEM bundle
+          after enroll/poll/trigger (suffix of the chain). Replaces bound
+          acme_srv.cfg values for this account when set.
+      - name: cert_chain_append
+        type: list
+        help: >
+          Paths to PEM files appended after skip. Each must certify the previous
+          certificate unless cert_chain_link_check is False.
+      - name: cert_chain_link_check
+        type: boolish
+        help: >
+          When True (default), every certificate in the chain must certify the
+          previous one (RFC 8555 §9.1). Set False to append unlinked CAs.
+          Fixtures may use string "True" / "False" or boolean.
       - name: subject
         type: map
         help: CSR subject DN whitelist (RFC3039 attribute names).
@@ -72,6 +89,21 @@ sections:
         type: boolish
       - name: reverse_address_check
         type: boolish
+      - name: http_01_support
+        type: boolish
+        help: >
+          Offer and validate http-01 challenges for this account.
+          Fixtures may use string "True" / "False".
+      - name: dns_01_support
+        type: boolish
+        help: >
+          Offer and validate dns-01 challenges for this account (required for
+          wildcards). Fixtures may use string "True" / "False".
+      - name: tls_alpn_01_support
+        type: boolish
+        help: >
+          Offer and validate tls-alpn-01 challenges for this account.
+          Fixtures may use string "True" / "False".
       # Fixtures sometimes misspell forward as foward_address_check — preserve via Extra.
 
   - id: authorization

@@ -34,6 +34,13 @@ describe('template load + merge', () => {
 		const cahandler = knownFieldNames(tpl.sections.find((s) => s.id === 'cahandler')!);
 		const order = knownFieldNames(tpl.sections.find((s) => s.id === 'order')!);
 		expect(cahandler.has('ca_error_details_forward')).toBe(true);
+		expect(cahandler.has('cert_chain_skip_list')).toBe(true);
+		expect(cahandler.has('cert_chain_append')).toBe(true);
+		expect(cahandler.has('cert_chain_link_check')).toBe(true);
+		const challenge = knownFieldNames(tpl.sections.find((s) => s.id === 'challenge')!);
+		expect(challenge.has('http_01_support')).toBe(true);
+		expect(challenge.has('dns_01_support')).toBe(true);
+		expect(challenge.has('tls_alpn_01_support')).toBe(true);
 		expect(order.has('profiles_check_disable')).toBe(true);
 	});
 
