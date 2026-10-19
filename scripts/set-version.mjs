@@ -46,6 +46,14 @@ writeJson('package-lock.json', (lock) => {
 
 writeJson('src-tauri/tauri.conf.json', (conf) => {
 	conf.version = version;
+	const windows = conf.app?.windows;
+	if (Array.isArray(windows)) {
+		for (const win of windows) {
+			if (win && typeof win === 'object' && 'title' in win) {
+				win.title = `a2c EAB Profile Editor ${version}`;
+			}
+		}
+	}
 });
 
 const cargoTomlPath = join(root, 'src-tauri/Cargo.toml');
