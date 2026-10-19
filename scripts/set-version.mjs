@@ -58,23 +58,35 @@ writeJson('src-tauri/tauri.conf.json', (conf) => {
 
 const cargoTomlPath = join(root, 'src-tauri/Cargo.toml');
 const cargoToml = readFileSync(cargoTomlPath, 'utf8');
-const nextCargoToml = cargoToml.replace(/^version\s*=\s*"[^"]+"/m, `version = "${version}"`);
-if (nextCargoToml === cargoToml) {
-	console.error('Could not update version in src-tauri/Cargo.toml');
+const cargoTomlMatch = cargoToml.match(/^version\s*=\s*"([^"]+)"/m);
+if (!cargoTomlMatch) {
+	console.error('Could not find version in src-tauri/Cargo.toml');
 	process.exit(1);
 }
-writeFileSync(cargoTomlPath, nextCargoToml);
+if (cargoTomlMatch[1] !== version) {
+	writeFileSync(
+		cargoTomlPath,
+		cargoToml.replace(/^version\s*=\s*"[^"]+"/m, `version = "${version}"`)
+	);
+}
 
 const cargoLockPath = join(root, 'src-tauri/Cargo.lock');
 const cargoLock = readFileSync(cargoLockPath, 'utf8');
-const nextCargoLock = cargoLock.replace(
-	/(\[\[package\]\]\r?\nname = "a2c-eab-profile-editor"\r?\nversion = ")[^"]+(")/,
-	`$1${version}$2`
+const cargoLockMatch = cargoLock.match(
+	/\[\[package\]\]\r?\nname = "a2c-eab-profile-editor"\r?\nversion = "([^"]+)"/
 );
-if (nextCargoLock === cargoLock) {
-	console.error('Could not update version in src-tauri/Cargo.lock');
+if (!cargoLockMatch) {
+	console.error('Could not find version in src-tauri/Cargo.lock');
 	process.exit(1);
 }
-writeFileSync(cargoLockPath, nextCargoLock);
+if (cargoLockMatch[1] !== version) {
+	writeFileSync(
+		cargoLockPath,
+		cargoLock.replace(
+			/(\[\[package\]\]\r?\nname = "a2c-eab-profile-editor"\r?\nversion = ")[^"]+(")/,
+			`$1${version}$2`
+		)
+	);
+}
 
 console.log(`Set app version to ${version}`);
